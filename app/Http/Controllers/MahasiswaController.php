@@ -19,9 +19,33 @@ class MahasiswaController extends Controller
      */
     public function index(): View
     {
-        $mahasiswas = Mahasiswa::with(['user', 'jurusan', 'prodi'])->latest()->paginate(10);
+        $search = request()->query('search');
+        $status = request()->query('status');
+        $jurusan = request()->query('jurusan');
 
-        return view('mahasiswa.index', compact('mahasiswas'));
+        $query = Mahasiswa::with(['user', 'jurusan', 'prodi', 'dosenWali.user']);
+
+        // Apply search filter
+        if ($search) {
+            $query->whereHas('user', function ($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%");
+            })->orWhere('nim', 'like', "%{$search}%");
+        }
+
+        // Apply status filter
+        if ($status) {
+            $query->where('status', $status);
+        }
+
+        // Apply jurusan filter
+        if ($jurusan) {
+            $query->where('jurusan_id', $jurusan);
+        }
+
+        $mahasiswas = $query->latest()->paginate(10)->withQueryString();
+        $jurusans = Jurusan::all();
+
+        return view('mahasiswa.index', compact('mahasiswas', 'jurusans'));
     }
 
     /**
@@ -31,8 +55,9 @@ class MahasiswaController extends Controller
     {
         $jurusans = Jurusan::all();
         $prodis = Prodi::all();
+        $dosens = \App\Models\Dosen::with('user')->get();
 
-        return view('mahasiswa.create', compact('jurusans', 'prodis'));
+        return view('mahasiswa.create', compact('jurusans', 'prodis', 'dosens'));
     }
 
     /**
@@ -63,6 +88,7 @@ class MahasiswaController extends Controller
                 'prodi_id' => $request->prodi_id,
                 'angkatan' => $request->angkatan,
                 'status' => $request->status,
+                'dosen_wali_id' => $request->dosen_wali_id,
             ]);
 
             DB::commit();
@@ -82,6 +108,9 @@ class MahasiswaController extends Controller
      */
     public function show(Mahasiswa $mahasiswa): View
     {
+        // Load relationships and calculate statistics
+        $mahasiswa->load(['user', 'jurusan', 'prodi', 'dosenWali.user']);
+
         return view('mahasiswa.show', compact('mahasiswa'));
     }
 
@@ -92,8 +121,9 @@ class MahasiswaController extends Controller
     {
         $jurusans = Jurusan::all();
         $prodis = Prodi::all();
+        $dosens = \App\Models\Dosen::with('user')->get();
 
-        return view('mahasiswa.edit', compact('mahasiswa', 'jurusans', 'prodis'));
+        return view('mahasiswa.edit', compact('mahasiswa', 'jurusans', 'prodis', 'dosens'));
     }
 
     /**
@@ -128,6 +158,7 @@ class MahasiswaController extends Controller
                 'prodi_id' => $request->prodi_id,
                 'angkatan' => $request->angkatan,
                 'status' => $request->status,
+                'dosen_wali_id' => $request->dosen_wali_id,
             ]);
 
             DB::commit();

@@ -4,7 +4,7 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ __('Transkrip Nilai') }}
             </h2>
-            <a href="{{ route('transkrip.print') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" target="_blank">
+            <a href="{{ route('transkrip.print') }}" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded shadow-sm transition-colors" target="_blank">
                 Cetak Transkrip
             </a>
         </div>
@@ -28,7 +28,7 @@
             @endif
 
             <!-- Student Info Card -->
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mb-6">
+            <div class="bg-white overflow-hidden shadow-md rounded-lg border-l-4 border-red-500 mb-6">
                 <div class="p-6 text-gray-900">
                     <h3 class="text-lg font-medium mb-4">Informasi Mahasiswa</h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -61,7 +61,7 @@
             </div>
 
             <!-- Semester Selection -->
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mb-6">
+            <div class="bg-white overflow-hidden shadow-md rounded-lg border-l-4 border-red-500 mb-6">
                 <div class="p-6 text-gray-900">
                     <h3 class="text-lg font-medium mb-4">Pilih Semester</h3>
 
@@ -75,7 +75,7 @@
                                 <form action="{{ route('transkrip.show') }}" method="GET">
                                     <input type="hidden" name="tahun_ajaran" value="{{ $semester->tahun_ajaran }}">
                                     <input type="hidden" name="semester" value="{{ $semester->semester }}">
-                                    <button type="submit" class="w-full bg-blue-100 hover:bg-blue-200 text-blue-800 font-semibold py-3 px-4 rounded border border-blue-200">
+                                    <button type="submit" class="w-full bg-red-100 hover:bg-red-200 text-red-800 font-semibold py-3 px-4 rounded border border-red-200">
                                         <div class="text-lg">{{ ucfirst($semester->semester) }}</div>
                                         <div>{{ $semester->tahun_ajaran }}</div>
                                     </button>
@@ -87,11 +87,11 @@
             </div>
 
             <!-- IPK Summary Card -->
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="bg-white overflow-hidden shadow-md rounded-lg border-l-4 border-red-500">
                 <div class="p-6 text-gray-900">
                     <h3 class="text-lg font-medium mb-4">Indeks Prestasi Kumulatif (IPK)</h3>
                     <div class="flex justify-center">
-                        <div class="bg-blue-100 text-blue-800 rounded-full w-32 h-32 flex items-center justify-center border-4 border-blue-300">
+                        <div class="bg-red-100 text-red-800 rounded-full w-32 h-32 flex items-center justify-center border-4 border-red-300">
                             <div class="text-center">
                                 <div class="text-3xl font-bold">{{ number_format($ipk, 2) }}</div>
                                 <div class="text-sm mt-1">dari 4.00</div>
@@ -102,10 +102,10 @@
                     <div class="mt-6">
                         <h4 class="font-medium mb-2">Keterangan Indeks Prestasi:</h4>
                         <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-sm">
-                            <div>3.51 - 4.00 = Dengan Pujian</div>
-                            <div>3.01 - 3.50 = Sangat Memuaskan</div>
-                            <div>2.76 - 3.00 = Memuaskan</div>
-                            <div>< 2.76 = Cukup</div>
+                            <div class="py-1 px-2 rounded bg-red-50">3.51 - 4.00 = Dengan Pujian</div>
+                            <div class="py-1 px-2 rounded bg-red-50">3.01 - 3.50 = Sangat Memuaskan</div>
+                            <div class="py-1 px-2 rounded bg-red-50">2.76 - 3.00 = Memuaskan</div>
+                            <div class="py-1 px-2 rounded bg-red-50">< 2.76 = Cukup</div>
                         </div>
                     </div>
                 </div>

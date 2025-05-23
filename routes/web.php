@@ -28,9 +28,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/show', [TranskripController::class, 'show'])->name('show');
         Route::get('/print', [TranskripController::class, 'printAll'])->name('print');
     });
-    Route::middleware(['auth', EnsureMahasiswaRole::class])->prefix('jadwal')->name('jadwal.')->group(function () {
-        Route::get('/', [JadwalController::class, 'index'])->name('index');
-    });
     Route::middleware(['auth', EnsureAdminRole::class])->group(function () {
         Route::resource('mahasiswa', MahasiswaController::class);
         Route::get('prodi-by-jurusan/{jurusan}', [MahasiswaController::class, 'getProdi'])->name('prodi.by.jurusan');

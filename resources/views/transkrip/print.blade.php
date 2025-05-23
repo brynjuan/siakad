@@ -88,7 +88,7 @@
 </head>
 <body>
     <div class="no-print" style="margin-bottom: 20px; text-align: right;">
-        <button onclick="window.print();" style="padding: 8px 16px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;">
+        <button onclick="window.print();" style="padding: 8px 16px; background: oklch(57.7% 0.245 27.325); color: white; border: none; border-radius: 4px; cursor: pointer;">
             Cetak Transkrip
         </button>
     </div>

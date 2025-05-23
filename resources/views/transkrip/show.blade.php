@@ -4,7 +4,7 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ __('Transkrip Nilai Semester') }} {{ ucfirst($request->semester) }} {{ $request->tahun_ajaran }}
             </h2>
-            <a href="{{ route('transkrip.index') }}" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded">
+            <a href="{{ route('transkrip.index') }}" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded shadow-sm transition-colors">
                 Kembali
             </a>
         </div>
@@ -13,7 +13,7 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <!-- Student Info Card -->
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mb-6">
+            <div class="bg-white overflow-hidden shadow-md rounded-lg border-l-4 border-red-500 mb-6">
                 <div class="p-6 text-gray-900">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
@@ -37,18 +37,18 @@
             </div>
 
             <!-- Mata Kuliah Table -->
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mb-6">
+            <div class="bg-white overflow-hidden shadow-md rounded-lg border-l-4 border-red-500 mb-6">
                 <div class="p-6 text-gray-900">
                     <div class="overflow-x-auto">
                         <table class="min-w-full bg-white border border-gray-200">
                             <thead>
                                 <tr>
-                                    <th class="px-6 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">No</th>
-                                    <th class="px-6 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Kode MK</th>
-                                    <th class="px-6 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Mata Kuliah</th>
-                                    <th class="px-6 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">SKS</th>
-                                    <th class="px-6 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Nilai Angka</th>
-                                    <th class="px-6 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Nilai Huruf</th>
+                                    <th class="px-6 py-3 border-b-2 border-gray-200 bg-red-50 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">No</th>
+                                    <th class="px-6 py-3 border-b-2 border-gray-200 bg-red-50 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Kode MK</th>
+                                    <th class="px-6 py-3 border-b-2 border-gray-200 bg-red-50 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Mata Kuliah</th>
+                                    <th class="px-6 py-3 border-b-2 border-gray-200 bg-red-50 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">SKS</th>
+                                    <th class="px-6 py-3 border-b-2 border-gray-200 bg-red-50 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Nilai Angka</th>
+                                    <th class="px-6 py-3 border-b-2 border-gray-200 bg-red-50 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Nilai Huruf</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -68,7 +68,7 @@
                                 @endforelse
                             </tbody>
                             <tfoot>
-                                <tr class="bg-gray-50">
+                                <tr class="bg-red-50">
                                     <td colspan="3" class="px-6 py-4 font-semibold text-right border-b border-gray-200">Total SKS:</td>
                                     <td class="px-6 py-4 font-semibold border-b border-gray-200">{{ $totalSksSemester }}</td>
                                     <td colspan="2" class="px-6 py-4 border-b border-gray-200"></td>
@@ -80,11 +80,11 @@
             </div>
 
             <!-- IP Semester Card -->
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="bg-white overflow-hidden shadow-md rounded-lg border-l-4 border-red-500">
                 <div class="p-6 text-gray-900">
                     <div class="flex items-center justify-between">
                         <h3 class="text-lg font-medium">Indeks Prestasi Semester:</h3>
-                        <div class="bg-blue-100 text-blue-800 rounded-lg px-6 py-3 text-xl font-bold border border-blue-300">
+                        <div class="bg-red-100 text-red-800 rounded-lg px-6 py-3 text-xl font-bold border border-red-300">
                             {{ number_format($ipSemester, 2) }}
                         </div>
                     </div>

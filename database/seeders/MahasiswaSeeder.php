@@ -6,6 +6,7 @@ use App\Models\Jurusan;
 use App\Models\Mahasiswa;
 use App\Models\Prodi;
 use App\Models\User;
+use App\Models\Dosen;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Faker\Factory as Faker;
@@ -40,6 +41,11 @@ class MahasiswaSeeder extends Seeder
             $prodiIdsForJurusan = Prodi::where('jurusan_id', $jurusanId)->pluck('id')->toArray();
             $prodiId = $faker->randomElement($prodiIdsForJurusan);
 
+            $faker = Faker::create('id_ID');
+
+            // Get all jurusan and prodi IDs for reference
+            $jurusanIds = Jurusan::pluck('id')->toArray();
+            $dosenIds = Dosen::pluck('id')->toArray();
             // Create angkatan between 2018-2023
             $angkatan = $faker->numberBetween(2018, 2023);
 
@@ -55,6 +61,7 @@ class MahasiswaSeeder extends Seeder
                 'prodi_id' => $prodiId,
                 'angkatan' => $angkatan,
                 'status' => $faker->randomElement(['aktif', 'cuti', 'lulus']),
+                'dosen_wali_id' => $faker->randomElement($dosenIds),
             ]);
         }
     }

@@ -19,25 +19,29 @@ class KrsApprovalController extends Controller
      */
     public function index(): View
     {
-        // Get current logged in mahasiswa
-        $mahasiswa = Mahasiswa::where('user_id', Auth::id())->firstOrFail();
+        // Get current logged in dosen
+        $dosen = Dosen::where('user_id', Auth::id())->firstOrFail();
 
         // Get active tahun ajaran
         $tahunAjaran = TahunAjaran::where('status', true)->first();
 
-        // Get KRS data
-        $krs = Krs::with(['kelas.mataKuliah', 'kelas.dosen.user', 'kelas.jadwal'])
-            ->where('mahasiswa_id', $mahasiswa->id)
-            ->where('tahun_ajaran', $tahunAjaran->nama ?? '')
-            ->where('semester', $tahunAjaran->semester ?? '')
+        // Get all mahasiswa that have this dosen as dosen wali
+        $mahasiswas = Mahasiswa::with(['user', 'prodi'])
+            ->where('dosen_wali_id', $dosen->id)
             ->get();
 
-        // Calculate total SKS
-        $totalSks = $krs->sum(function ($item) {
-            return $item->kelas->mataKuliah->sks ?? 0;
-        });
+        // Get KRS data for each mahasiswa
+        foreach ($mahasiswas as $mahasiswa) {
+            $krsList = Krs::where('mahasiswa_id', $mahasiswa->id)
+                ->where('tahun_ajaran', $tahunAjaran->nama ?? '')
+                ->where('semester', $tahunAjaran->semester ?? '')
+                ->get();
 
-        return view('krs.index', compact('krs', 'mahasiswa', 'tahunAjaran', 'totalSks'));
+            $mahasiswa->krs_count = $krsList->count();
+            $mahasiswa->krs_status = $krsList->count() > 0 ? $krsList->first()->status : 'belum_mengisi';
+        }
+
+        return view('krs.approval.index', compact('mahasiswas', 'dosen', 'tahunAjaran'));
     }
 
     /**

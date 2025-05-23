@@ -15,30 +15,8 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-
-                    @if(Auth::user()->role === 'dosen')
-                    <x-nav-link :href="route('nilai.index')" :active="request()->routeIs('nilai.*')">
-                        {{ __('Input Nilai') }}
-                    </x-nav-link>
-
-                    <x-nav-link :href="route('krs.approval.index')" :active="request()->routeIs('krs.approval.*')">
-                        {{ __('Persetujuan KRS') }}
-                    </x-nav-link>
-                    @endif
-
-                    @if(Auth::user()->role === 'mahasiswa')
-                    <x-nav-link :href="route('krs.index')" :active="request()->routeIs('krs.*')">
-                        {{ __('KRS') }}
-                    </x-nav-link>
-
-                    <x-nav-link :href="route('transkrip.index')" :active="request()->routeIs('transkrip.*')">
-                        {{ __('Transkrip Nilai') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('jadwal.index')" :active="request()->routeIs('jadwal.*')">
-                        {{ __('Jadwal Kuliah') }}
-                    </x-nav-link>
-                    @endif
                 </div>
+
             </div>
 
             <!-- Settings Dropdown -->
