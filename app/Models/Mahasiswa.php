@@ -24,6 +24,10 @@ class Mahasiswa extends Model
         'dosen_wali_id',
     ];
 
+    protected $casts = [
+        'tanggal_lahir' => 'date',
+    ];
+
     /**
      * Get the user that owns the mahasiswa.
      */
