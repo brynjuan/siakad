@@ -101,7 +101,7 @@ return new class extends Migration
             $table->foreignId('kelas_id')->constrained('kelas');
             $table->string('tahun_ajaran');
             $table->string('keterangan')->nullable();
-            $table->unsignedTinyInteger('semester');
+            $table->enum('semester', ['ganjil', 'genap']);
             $table->enum('status', ['pending', 'disetujui', 'ditolak'])->default('pending');
             $table->timestamps();
         });

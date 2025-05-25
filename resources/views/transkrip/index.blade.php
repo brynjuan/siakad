@@ -4,9 +4,6 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ __('Transkrip Nilai') }}
             </h2>
-            <a href="{{ route('transkrip.print') }}" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded shadow-sm transition-colors" target="_blank">
-                Cetak Transkrip
-            </a>
         </div>
     </x-slot>
 
