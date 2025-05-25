@@ -3,7 +3,7 @@
         <!-- Left Column - Login -->
         <div class="p-8 md:p-10 md:w-1/2 border-r border-gray-200">
             <div class="mb-6 text-center">
-                <x-application-logo class="w-16 h-16 mx-auto text-red-600" />
+             <img src="{{ asset('images/logo-untad.png') }}" alt="Logo Untad" class="w-16 h-16 mx-auto" />
                 <h1 class="text-3xl font-bold text-gray-800 mt-4">Login</h1>
                 <p class="text-sm text-gray-600">Siakad Untad</p>
             </div>

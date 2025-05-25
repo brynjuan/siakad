@@ -51,22 +51,6 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('mahasiswas', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->string('nim')->unique();
-            $table->unsignedBigInteger('dosen_wali_id')->nullable()->after('prodi_id');
-            $table->foreign('dosen_wali_id')->references('id')->on('dosens')->onDelete('set null');
-            $table->string('tempat_lahir');
-            $table->date('tanggal_lahir');
-            $table->enum('jenis_kelamin', ['L', 'P']);
-            $table->text('alamat');
-            $table->foreignId('jurusan_id')->constrained('jurusan');
-            $table->foreignId('prodi_id')->constrained('prodi');
-            $table->year('angkatan');
-            $table->enum('status', ['aktif', 'cuti', 'lulus', 'do']);
-            $table->timestamps();
-        });
         Schema::create('dosens', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
@@ -75,6 +59,21 @@ return new class extends Migration
             $table->enum('jenis_kelamin', ['L', 'P']);
             $table->text('alamat');
             $table->string('no_hp');
+            $table->timestamps();
+        });
+        Schema::create('mahasiswas', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->string('nim')->unique();
+            $table->foreignId('dosen_wali_id')->nullable()->constrained('dosens')->onDelete('set null');
+            $table->string('tempat_lahir');
+            $table->date('tanggal_lahir');
+            $table->enum('jenis_kelamin', ['L', 'P']);
+            $table->text('alamat');
+            $table->foreignId('jurusan_id')->constrained('jurusan');
+            $table->foreignId('prodi_id')->constrained('prodi');
+            $table->year('angkatan');
+            $table->enum('status', ['aktif', 'cuti', 'lulus', 'do']);
             $table->timestamps();
         });
         Schema::create('mata_kuliah', function (Blueprint $table) {
@@ -93,7 +92,7 @@ return new class extends Migration
             $table->foreignId('dosen_id')->constrained('dosens');
             $table->string('nama_kelas'); // A, B, C
             $table->string('tahun_ajaran');
-            $table->unsignedTinyInteger('semester');
+            $table->enum('semester', ['ganjil', 'genap']);
             $table->timestamps();
         });
         Schema::create('krs', function (Blueprint $table) {
@@ -101,7 +100,7 @@ return new class extends Migration
             $table->foreignId('mahasiswa_id')->constrained('mahasiswas');
             $table->foreignId('kelas_id')->constrained('kelas');
             $table->string('tahun_ajaran');
-            $table->string('keterangan')->nullable()->after('status');
+            $table->string('keterangan')->nullable();
             $table->unsignedTinyInteger('semester');
             $table->enum('status', ['pending', 'disetujui', 'ditolak'])->default('pending');
             $table->timestamps();
