@@ -4,11 +4,15 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ __('Detail KRS Mahasiswa') }}
             </h2>
-            <a href="{{ route('krs.approval.index') }}" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-md shadow-sm transition-colors flex items-center">
-                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                </svg>
-                Kembali
+            <a href="{{ route('krs.approval.index') }}"
+               class="bg-gradient-to-r from-red-600 to-pink-500 hover:from-red-700 hover:to-pink-600 text-white font-bold py-2 px-5 rounded-lg shadow-lg transition-all duration-300 flex items-center border-2 border-red-700 hover:scale-105 group"
+               style="box-shadow: 0 4px 14px 0 rgba(255, 0, 60, 0.15);">
+                <span class="flex items-center">
+                    <svg class="w-5 h-5 mr-2 text-white group-hover:text-yellow-200 transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                    </svg>
+                    <span class="tracking-wide">Kembali</span>
+                </span>
             </a>
         </div>
     </x-slot>
