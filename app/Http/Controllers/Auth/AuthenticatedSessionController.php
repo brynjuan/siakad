@@ -68,12 +68,7 @@ class AuthenticatedSessionController extends Controller
             'password' => $request->password,
         ];
 
-        // Using email
-        $credentials = [
-            'email' => $request->login,
-            'password' => $request->password,
-        ];
-
+        
         if (Auth::attempt($credentials, $request->boolean('remember'))) {
             $request->session()->regenerate();
 
